@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Data Form</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <form id="blog-form">
+        <h1>Blog Data Entry</h1>
+
+        <!-- Blog Title -->
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+
+        <!-- Blog Description -->
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" required></textarea>
+
+        <!-- Header Image -->
+        <label for="headerImage">Header Image URL:</label>
+        <input type="url" id="headerImage" name="headerImage" required>
+
+        <!-- Sidebar Links -->
+        <h2>Sidebar Links</h2>
+        <div id="sidebar-links-container">
+            <div class="sidebar-link">
+                <input type="url" class="sidebar-link-href" placeholder="Link URL" required>
+                <input type="text" class="sidebar-link-text" placeholder="Link Text" required>
+                <button type="button" class="remove-link">Remove</button>
+            </div>
+        </div>
+        <button type="button" id="add-link">Add Link</button>
+
+        <!-- Content Sections -->
+        <h2>Content Sections</h2>
+        <div id="content-sections-container">
+            <div class="content-section">
+                <select class="content-type" required>
+                    <option value="">Select Type</option>
+                    <option value="heading">Heading</option>
+                    <option value="text">Text</option>
+                    <option value="image">Image</option>
+                    <option value="quote">Quote</option>
+                </select>
+                <input type="text" class="content-text" placeholder="Text" required>
+                <input type="text" class="content-id" placeholder="ID (for headings)">
+                <input type="url" class="content-src" placeholder="Image URL">
+                <input type="text" class="content-alt" placeholder="Image Alt Text">
+                <input type="text" class="quote-author" placeholder="Quote Author">
+                <button type="button" class="remove-section">Remove</button>
+            </div>
+        </div>
+        <button type="button" id="add-section">Add Section</button>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script src="./form-script.js"></script>
+</body>
+</html>
