@@ -3,55 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blogging</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Saira+Semi+Condensed:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300..700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./styles.css">
+    <title>Blog Post Editor</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <!-- title -->
-        <h1>How to run a successful business<br> with your partner (and stay together)</h1>
-        <!-- description -->
-        <p>Starting a business with your spouse or significant other is an exciting but delicate process and <br> requires a great deal of faith. We spoke to a dozen successful businesses about how they get it right.</p>
-        <!-- head image -->
-        <img src="./assets/images/couple.jpg" alt="Couple">
-    </header>
-    <!-- side bar that will always be there, just that the content inside will be changing -->
-    <main class="container">
-        <nav class="sidebar">
-            <ul>
-                <li><a href="#introduction">Introduction</a> <img src="./assets/images/arrow.svg" alt="Icon" class="icon"></li>
-                <li><a href="#">Choosing the best structure</a> <img src="./assets/images/arrow.svg" alt="Icon" class="icon"></li>
-                <li><a href="#">How to work well together</a> <img src="./assets/images/arrow.svg" alt="Icon" class="icon"></li>
-                <li><a href="#">What legal agreements you need</a> <img src="./assets/images/arrow.svg" alt="Icon" class="icon"></li>
-                <li><a href="#">More resources</a> <img src="./assets/images/arrow.svg" alt="Icon" class="icon"></li>
-                <li><a href="#">Conclusion</a> <img src="./assets/images/arrow.svg" alt="Icon" class="icon"></li>
-            </ul>
-        </nav>
-        
-        <!-- contents -->
-        <div class="content">
-            <h2 class="introduction">Introduction</h2>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magnam facere, quisquam qui doloribus, repellat, doloremque quibusdam impedit ut fuga quo asperiores quasi. Libero omnis inventore repellat nisi porro odit impedit!
-            Libero veritatis laboriosam, doloribus, nesciunt ipsa et nemo, dicta nostrum unde qui repellat ut suscipit aliquam tenetur commodi? At magni amet assumenda pariatur perferendis. Praesentium eligendi nam quibusdam esse nihil.
-            Laborum unde dolores reiciendis quidem. Laborum accusamus sequi assumenda nam suscipit modi at! Rem repudiandae consequuntur, eaque ducimus nam reiciendis quo facilis, modi assumenda nisi error numquam voluptas quos cum!
-            Nihil odio harum ratione labore mollitia, impedit praesentium rerum obcaecati dolor sed sapiente ullam beatae temporibus voluptatem, facere inventore tenetur debitis officia quia quis aspernatur reiciendis expedita. Doloremque, quam magnam!
-            Obcaecati vel fuga minus dolorum quaerat facilis veniam, omnis ratione ipsam voluptates ab atque quidem error et praesentium eligendi quod exercitationem quibusdam nam necessitatibus neque consequuntur doloremque ipsum! Cum, quod?</p>
-            <img src="./assets/images/manwoman.jpg" alt="Image description">
+    <div class="container">
+        <form id="blogForm">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title">
 
-            <!-- quote here -->
-            <blockquote>
-                <p>“The success of a business partnership is largely determined by how well the partners communicate and work together. Trust and respect are key.”
-                    <span>— Expert Name</span></p>
-            </blockquote>
-        </div>
-    </main>
+            <label for="description">Description</label>
+            <textarea id="description" name="description"></textarea>
+
+            <label for="image">Image</label>
+            <input type="file" id="image" name="image">
+
+            <div class="contents">
+                <label>Contents</label>
+                <div class="section-header">
+                    <p>Section</p>
+                    <button type="button" id="addSectionButton">+</button>
+                </div>
+                <div class="sections">
+                    <div class="section">
+                        <details open>
+                            <summary>Section One:</summary>
+                            <label for="sectionTitle">Section Title:</label>
+                            <input type="text" id="sectionTitle" name="sectionTitle">
+                            
+                            <div class="editor-toolbar">
+                                <button type="button" class="boldBtn"><img src="./assets/images/bold.svg" alt="Bold"></button>
+                                <button type="button" class="italicBtn"><img src="./assets/images/italic.svg" alt="Italic" class="italic"></button>
+                                <button type="button" class="quoteBtn"><img src="./assets/images/quote.svg" alt="Quote"></button>
+                                <button><img src="./assets/images/image.svg" alt="Add Image" class="pic"></button>
+                            </div>                            
+                            
+                            <textarea class="sectionContent" placeholder="Write your content here..."></textarea>
+                        </details>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" id="submitForm">Submit</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>

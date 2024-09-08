@@ -1,101 +1,106 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // sample data
+const numberWords = [
+  "One",
+  "Two",
+  "Three",
+  "Four",
+  "Five",
+  "Six",
+  "Seven",
+  "Eight",
+  "Nine",
+  "Ten",
+];
+let sectionCount = 2;
+
+document
+  .getElementById("addSectionButton")
+  .addEventListener("click", function () {
+    if (sectionCount > numberWords.length) {
+      // disable button if limit reached
+      document.getElementById("addSectionButton").disabled = true;
+      return;
+    }
+    const sectionsContainer = document.querySelector(".sections");
+    const newSection = document.createElement("div");
+    newSection.className = "section";
+
+    const sectionNumber = numberWords[sectionCount - 1];
+    // 
+    newSection.innerHTML = `
+        <details>
+            <summary>Section ${sectionNumber}:</summary>
+            <label for="sectionTitle">Section Title:</label>
+            <input type="text" id="sectionTitle" name="sectionTitle">
+            
+            <div class="editor-toolbar">
+                <button type="button" class="boldBtn"><img src="./assets/images/bold.svg" alt="Bold"></button>
+                <button type="button" class="italicBtn"><img src="./assets/images/italic.svg" alt="Italic" class="italic"></button>
+                <button type="button" class="quoteBtn"><img src="./assets/images/quote.svg" alt="Quote"></button>
+                <button><img src="./assets/images/image.svg" alt="Add Image" class="pic"></button>
+            </div>                            
+            
+            <textarea class="sectionContent" placeholder="Write your content here..."></textarea>
+        </details>
+    `;
+
+    sectionsContainer.appendChild(newSection);
+    sectionCount++;
+  });
+
+  document.getElementById('blogForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const title = document.getElementById('title').value;
+    const description = document.getElementById('description').value;
+
+    const headerImage = "https://example.com/image.jpg"; // placeholder image URL
+
+    const sections = document.querySelectorAll('.section');
+    const content = [];
+
+    sections.forEach((section, index) => {
+        const sectionTitle = section.querySelector('input[name="sectionTitle"]').value;
+        const sectionContent = section.querySelector('.sectionContent').value;
+
+        // section, title and content to content array
+        content.push({
+            type: "heading",
+            level: 2,
+            text: sectionTitle,
+            id: `section-${index + 1}`
+        });
+        content.push({
+            type: "text",
+            content: sectionContent
+        });
+    });
+
+    // build JSON data
     const blogData = {
-        title: "How to run a successful business with your partner (and stay together)",
-        description: "Starting a business with your spouse or significant other is an exciting but delicate process...",
-        headerImage: "https://images.unsplash.com/photo-1517456045241-3501321fa12d?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        sidebarLinks: [
-            { href: "#introduction", text: "Introduction" },
-            { href: "#choosing-structure", text: "Choosing the best structure" }
-        ],
-        content: [
-            {
-                type: "heading",
-                level: 2,
-                text: "Introduction",
-                id: "introduction" // ID for smooth scrolling
-            },
-            {
-                type: "text",
-                content: "Lorem ipsum dolor sit amet consectetur, adipisicing elit..."
-            },
-            {
-                type: "image",
-                src: "https://images.unsplash.com/photo-1514415008039-efa173293080?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                alt: "Content Image"
-            },
-            {
-                type: "heading",
-                level: 2,
-                text: "Choosing the Best Structure",
-                id: "choosing-structure" // ID for smooth scrolling
-            },
-            {
-                type: "text",
-                content: "Laborum unde dolores reiciendis quidem. Laborum accusamus sequi assumenda nam suscipit modi at! Rem repudiandae consequuntur, eaque ducimus nam reiciendis quo facilis, modi assumenda nisi error numquam voluptas quos cum!"
-            },
-            {
-                type: "image",
-                src: "https://images.unsplash.com/photo-1557946853-2538933cbfc6?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                alt: "Another Content Image"
-            },
-            {
-                type: "quote",
-                text: "“The success of a business partnership is largely determined by how well the partners communicate and work together. Trust and respect are key.”",
-                author: "Expert Name"
-            }
-        ]
+        title: title,
+        description: description,
+        headerImage: headerImage,
+        sidebarLinks: content.filter(item => item.type === 'heading').map(heading => ({
+            href: `#${heading.id}`,
+            text: heading.text
+        })),
+        content: content
     };
 
-    // Inject header content
-    document.getElementById('blog-title').textContent = blogData.title;
-    document.getElementById('blog-description').textContent = blogData.description;
-    document.getElementById('header-image').src = blogData.headerImage;
-
-    // Inject sidebar links
-    const sidebarLinks = document.getElementById('sidebar-links');
-    blogData.sidebarLinks.forEach(link => {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = link.href;
-        a.textContent = link.text;
-
-        const icon = document.createElement('img');
-        icon.src = './assets/images/arrow.svg';
-        icon.alt = 'Icon';
-        icon.className = 'icon';
-
-        li.appendChild(a);
-        li.appendChild(icon);
-        sidebarLinks.appendChild(li);
-    });
-
-    // Inject content
-    const contentContainer = document.getElementById('content-container');
-    blogData.content.forEach(item => {
-        if (item.type === 'heading') {
-            const heading = document.createElement(`h${item.level}`);
-            heading.textContent = item.text;
-            heading.id = item.id; // ID for smooth scrolling
-            contentContainer.appendChild(heading);
-        } else if (item.type === 'text') {
-            const p = document.createElement('p');
-            p.textContent = item.content;
-            contentContainer.appendChild(p);
-        } else if (item.type === 'image') {
-            const img = document.createElement('img');
-            img.src = item.src;
-            img.alt = item.alt;
-            contentContainer.appendChild(img);
-        } else if (item.type === 'quote') {
-            const blockquote = document.createElement('blockquote');
-            const p = document.createElement('p');
-            p.textContent = item.text;
-            const span = document.createElement('span');
-            span.textContent = `— ${item.author}`;
-            p.appendChild(span);
-            blockquote.appendChild(p);
-            contentContainer.appendChild(blockquote);
-        }
-    });
+    console.log(blogData);
 });
+
+// document.addEventListener('click', function(event) {
+//     if (event.target.classList.contains('boldBtn')) {
+//         const contentArea = event.target.closest('.section').querySelector('.sectionContent');
+//         contentArea.value += '**bold text**'; // Simple Markdown formatting example
+//     }
+//     if (event.target.classList.contains('italicBtn')) {
+//         const contentArea = event.target.closest('.section').querySelector('.sectionContent');
+//         contentArea.value += '*italic text*'; // Simple Markdown formatting example
+//     }
+//     if (event.target.classList.contains('quoteBtn')) {
+//         const contentArea = event.target.closest('.section').querySelector('.sectionContent');
+//         contentArea.value += '> quote text'; // Simple Markdown formatting example
+//     }
+// });

@@ -1,150 +1,158 @@
-@font-face {
-  font-family: 'Lota Grotesque Semi Bold';
-  src: url('./assets/fonts/LosAndesLotaGrotesqueSemiBold.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Lota Grotesque Semi Bold It';
-  src: url('./assets/fonts/LosAndeLotaGrotesqueSemiBoldItalic.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
 :root {
-  --primary: #a7d406;
-  --secondary: #fffef0;
-  --dark: #000;
+    --primary: #a7d406;
+    --secondary: #fffef0;
+    --dark: #000;
+    --input-border: #3e3e3e;
+    --text-light: #eeeeee;
+    --button-hover-bg: #0056b3;
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  scroll-behavior: smooth !important;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body,
-html {
-  font-family: "Saira Semi Condensed", "Poppins", sans-serif;
-  background-color: var(--dark);
-  color: var(--secondary);
-}
-
-::-webkit-scrollbar {
-  background-color: #101010;
-  width: 4px;
-  height: 3px;
-}
-::-webkit-scrollbar-thumb {
-  background-color: var(--primary) !important;
-  cursor: pointer;
-}
-::-moz-range-track {
-  background-color: #101010;
-}
-
-header {
-  padding: 3%;
-}
-header h1 {
-  font-family: "Lota Grotesque Semi Bold";
-  font-size: 3.5rem;
-}
-header p {
-  padding-top: 20px;
-  font-size: 1.3rem;
-}
-header img {
-  padding-top: 50px;
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
+body, html {
+    background-color: var(--dark);
+    color: var(--secondary);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
+    line-height: 1.6;
 }
 
 .container {
-  display: flex;
-  width: 100%;
+    margin: 20px auto;
+    padding: 10px;
+    border-radius: 12px;
 }
 
-.sidebar {
-  font-family: "Lota Grotesque Semi Bold";
-  font-size: 1.2rem;
-  width: 40%;
-  padding: 3%;
-  border-right: 1px solid #444;
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: var(--text-light);
 }
 
-.sidebar ul {
-  list-style-type: none;
+input[type="text"],
+textarea,
+input[type="file"] {
+    font-family: inherit;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 2px solid var(--input-border);
+    border-radius: 6px;
+    background-color: var(--dark);
+    color: var(--secondary);
+    font-size: 16px;
+    resize: vertical;
 }
 
-.sidebar li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #444;
+textarea {
+    min-height: 100px;
 }
 
-.sidebar li a {
-  text-decoration: none;
-  padding: 5px 0;
-  color: var(--secondary);
-  flex-grow: 1;
+input[type="text"]:focus,
+textarea:focus,
+input[type="file"]:focus {
+    border-color: var(--primary);
+    outline: none;
 }
 
-.sidebar li .icon {
-  color: var(--secondary);
-  width: 20px;
-  height: 20px;
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--primary);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
-.sidebar li a:hover,
-.sidebar li.active a {
-  background-color: var(--primary);
+button:hover {
+    background-color: var(--button-hover-bg);
+    transform: translateY(-2px);
 }
 
-.content {
-  width: 60%;
-  padding: 3%;
-  color: var(--secondary); /* Ensure text color matches theme */
+button:active {
+    transform: translateY(1px);
 }
 
-.content h2 {
-  font-family: "Lota Grotesque Semi Bold";
-  margin-bottom: 20px;
-  font-size: 2rem;
+.contents {
+    margin-top: 30px;
 }
 
-.content p {
-  margin-bottom: 20px;
-  line-height: 1.6;
-  text-align: justify;
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
-.content img {
-  padding: 20px 0;
-  max-width: 100%;
-  height: auto;
+.sections {
+    border: 2px solid var(--input-border);
+    padding: 15px;
+    border-radius: 8px;
+    background-color: var(--dark);
 }
 
-blockquote p{
-  font-family: "Lota Grotesque Semi Bold It";
-  font-weight: 600;
-  font-size: 2rem;
-  border-left: 2px solid #ccc;
-  padding-left: 16px;
-  color: #555;
-  text-align: left !important;
+details summary {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    cursor: pointer;
+    color: var(--text-light);
 }
-blockquote span{
-  margin-top: 2%;
-  white-space: pre;
-  font-family: "saira semi condensed";
-  font-size: 1.5rem;
-  display: block;
-  font-style: italic;
+
+.editor-toolbar {
+    display: flex;
+    justify-content: flex-start;
+    background-color: var(--dark);
+    border: 2px solid var(--input-border);
+    padding: 5px 10px;
+    border-radius: 6px;
+    margin-bottom: 5px;
+}
+
+.editor-toolbar button {
+    background-color: transparent;
+    color: var(--secondary);
+    border: none;
+    margin-right: 15px;
+    cursor: pointer;
+    padding: 0;
+    font-size: 18px;
+}
+
+.editor-toolbar .italic {
+    height: 18px;
+}
+
+.editor-toolbar .pic {
+    height: 30px;
+}
+
+.editor-toolbar button img {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
+}
+
+textarea.sectionContent::placeholder {
+    color: var(--text-light);
+    opacity: 0.7;
+}
+
+#addSectionButton{
+    color: var(--dark);
+    font-size: larger;
+}
+
+#submitForm{
+    font-family: inherit;
+    margin-top: 10px;
+    float: right;
+    color: var(--dark);
 }
